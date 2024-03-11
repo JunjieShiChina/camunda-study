@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1tu0qyc" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="Process_usertask_test" name="请假流程" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1" camunda:initiator="starter">
+      <bpmn:outgoing>Flow_07a7uan</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_07a7uan" sourceRef="StartEvent_1" targetRef="Activity_0qac3wf" />
+    <bpmn:userTask id="Activity_0qac3wf" name="请假申请" camunda:assignee="${starter}">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="leave_reason" label="请假原因" type="string">
+            <camunda:properties />
+            <camunda:validation />
+          </camunda:formField>
+          <camunda:formField id="start_date" label="开始时间" type="date">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="end_date" label="结束时间" type="date">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_07a7uan</bpmn:incoming>
+      <bpmn:outgoing>Flow_1a9oiqi</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1a9oiqi" sourceRef="Activity_0qac3wf" targetRef="Activity_1h33oz7" />
+    <bpmn:userTask id="Activity_1h33oz7" name="领导审批" camunda:assignee="zhangbo">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="comment" label="审批意见" type="string" defaultValue="同意">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1a9oiqi</bpmn:incoming>
+      <bpmn:outgoing>Flow_1fww6or</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_1jbtsgg">
+      <bpmn:incoming>Flow_1fww6or</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1fww6or" sourceRef="Activity_1h33oz7" targetRef="Event_1jbtsgg" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_usertask_test">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ri1o92_di" bpmnElement="Activity_0qac3wf">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0vsltiv_di" bpmnElement="Activity_1h33oz7">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1jbtsgg_di" bpmnElement="Event_1jbtsgg">
+        <dc:Bounds x="592" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_07a7uan_di" bpmnElement="Flow_07a7uan">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1a9oiqi_di" bpmnElement="Flow_1a9oiqi">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fww6or_di" bpmnElement="Flow_1fww6or">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="592" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

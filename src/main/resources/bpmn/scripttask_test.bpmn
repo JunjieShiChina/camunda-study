@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1hcdsl2" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="Process_scripttask_test1" name="脚本任务测试1" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1uw36at</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1uw36at" sourceRef="StartEvent_1" targetRef="Activity_0maymkf" />
+    <bpmn:scriptTask id="Activity_0maymkf" name="初始化假期" scriptFormat="JavaScript" camunda:resultVariable="originDays">
+      <bpmn:incoming>Flow_1uw36at</bpmn:incoming>
+      <bpmn:outgoing>Flow_1h79ctl</bpmn:outgoing>
+      <bpmn:script>originDays=10;</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_1h79ctl" sourceRef="Activity_0maymkf" targetRef="Activity_15c7gm6" />
+    <bpmn:sequenceFlow id="Flow_13po8oa" sourceRef="Activity_15c7gm6" targetRef="Activity_1q0p2k0" />
+    <bpmn:sequenceFlow id="Flow_1pvxk6m" sourceRef="Activity_1q0p2k0" targetRef="Activity_1hrssul" />
+    <bpmn:userTask id="Activity_15c7gm6" name="请假" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="dayNumber" label="请假天数" type="long">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1h79ctl</bpmn:incoming>
+      <bpmn:outgoing>Flow_13po8oa</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Activity_1q0p2k0" name="领导审批" camunda:assignee="demo">
+      <bpmn:incoming>Flow_13po8oa</bpmn:incoming>
+      <bpmn:outgoing>Flow_1pvxk6m</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:scriptTask id="Activity_1hrssul" name="计算剩余假期" scriptFormat="JavaScript" camunda:resultVariable="leftDay">
+      <bpmn:incoming>Flow_1pvxk6m</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ng23th</bpmn:outgoing>
+      <bpmn:script>leftDay = originDays-dayNumber;</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_0ng23th" sourceRef="Activity_1hrssul" targetRef="Activity_119y15w" />
+    <bpmn:endEvent id="Event_0nqnia7">
+      <bpmn:incoming>Flow_0zti9e1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0zti9e1" sourceRef="Activity_119y15w" targetRef="Event_0nqnia7" />
+    <bpmn:serviceTask id="Activity_119y15w" name="输出剩余天数" camunda:delegateExpression="${printLeftDaysService}">
+      <bpmn:incoming>Flow_0ng23th</bpmn:incoming>
+      <bpmn:outgoing>Flow_0zti9e1</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_scripttask_test1">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0wmw6ma_di" bpmnElement="Activity_0maymkf">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_04g35ge_di" bpmnElement="Activity_15c7gm6">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1kjee51_di" bpmnElement="Activity_1q0p2k0">
+        <dc:Bounds x="590" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1oee8vj_di" bpmnElement="Activity_1hrssul">
+        <dc:Bounds x="750" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0nqnia7_di" bpmnElement="Event_0nqnia7">
+        <dc:Bounds x="1092" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_055i2st_di" bpmnElement="Activity_119y15w">
+        <dc:Bounds x="920" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1uw36at_di" bpmnElement="Flow_1uw36at">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1h79ctl_di" bpmnElement="Flow_1h79ctl">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13po8oa_di" bpmnElement="Flow_13po8oa">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="590" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1pvxk6m_di" bpmnElement="Flow_1pvxk6m">
+        <di:waypoint x="690" y="117" />
+        <di:waypoint x="750" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ng23th_di" bpmnElement="Flow_0ng23th">
+        <di:waypoint x="850" y="117" />
+        <di:waypoint x="920" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0zti9e1_di" bpmnElement="Flow_0zti9e1">
+        <di:waypoint x="1020" y="117" />
+        <di:waypoint x="1092" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

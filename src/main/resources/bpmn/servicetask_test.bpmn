@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1uzw2fy" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="servicetask_test" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0pltp6k</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0pltp6k" sourceRef="StartEvent_1" targetRef="Activity_0sqvww0" />
+    <bpmn:serviceTask id="Activity_0sqvww0" name="预约修电脑" camunda:class="me.shijunjiee.camundastudy.servicetask.ReserveRepairService">
+      <bpmn:incoming>Flow_0pltp6k</bpmn:incoming>
+      <bpmn:outgoing>Flow_1mww5lu</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1mww5lu" sourceRef="Activity_0sqvww0" targetRef="Activity_1mdwqlg" />
+    <bpmn:serviceTask id="Activity_1mdwqlg" name="师傅上门修理" camunda:delegateExpression="${doingRepairService}">
+      <bpmn:incoming>Flow_1mww5lu</bpmn:incoming>
+      <bpmn:outgoing>Flow_049ro1k</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_049ro1k" sourceRef="Activity_1mdwqlg" targetRef="Activity_0taw65g" />
+    <bpmn:serviceTask id="Activity_0taw65g" name="公司电话回访" camunda:expression="${telCallService.doCall(execution)}" camunda:resultVariable="score">
+      <bpmn:incoming>Flow_049ro1k</bpmn:incoming>
+      <bpmn:outgoing>Flow_0cnngkb</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0cnngkb" sourceRef="Activity_0taw65g" targetRef="Activity_0cts591" />
+    <bpmn:serviceTask id="Activity_0cts591" name="查看评分" camunda:expression="${telCallService.getScore(execution)}">
+      <bpmn:incoming>Flow_0cnngkb</bpmn:incoming>
+      <bpmn:outgoing>Flow_0pcac20</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_14i15p0">
+      <bpmn:incoming>Flow_0pcac20</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0pcac20" sourceRef="Activity_0cts591" targetRef="Event_14i15p0" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="servicetask_test">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="79" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1rsmjk8_di" bpmnElement="Activity_0sqvww0">
+        <dc:Bounds x="270" y="57" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1u9lae0_di" bpmnElement="Activity_1mdwqlg">
+        <dc:Bounds x="430" y="57" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0xvtfed_di" bpmnElement="Activity_0taw65g">
+        <dc:Bounds x="590" y="57" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_036p2pq_di" bpmnElement="Activity_0cts591">
+        <dc:Bounds x="750" y="57" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_14i15p0_di" bpmnElement="Event_14i15p0">
+        <dc:Bounds x="912" y="79" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0pltp6k_di" bpmnElement="Flow_0pltp6k">
+        <di:waypoint x="215" y="97" />
+        <di:waypoint x="270" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1mww5lu_di" bpmnElement="Flow_1mww5lu">
+        <di:waypoint x="370" y="97" />
+        <di:waypoint x="430" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_049ro1k_di" bpmnElement="Flow_049ro1k">
+        <di:waypoint x="530" y="97" />
+        <di:waypoint x="590" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0cnngkb_di" bpmnElement="Flow_0cnngkb">
+        <di:waypoint x="690" y="97" />
+        <di:waypoint x="750" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0pcac20_di" bpmnElement="Flow_0pcac20">
+        <di:waypoint x="850" y="97" />
+        <di:waypoint x="912" y="97" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
