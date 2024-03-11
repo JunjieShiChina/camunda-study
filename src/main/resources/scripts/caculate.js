@@ -1,0 +1,1 @@
+leftDay = originDays-dayNumber;
