@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0jbwdeg" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="Process_call_activity_test" name="调用子流程-主流程" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1" camunda:initiator="starter">
+      <bpmn:outgoing>Flow_1jm7p1k</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Activity_0i8ni3h" name="用户上传视频" camunda:assignee="${starter}">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="vnums" label="视频数量" type="long" defaultValue="1">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1jm7p1k</bpmn:incoming>
+      <bpmn:outgoing>Flow_0oplsc1</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_1jm7p1k" sourceRef="StartEvent_1" targetRef="Activity_0i8ni3h" />
+    <bpmn:sequenceFlow id="Flow_0oplsc1" sourceRef="Activity_0i8ni3h" targetRef="Activity_1qwmmlq" />
+    <bpmn:callActivity id="Activity_1qwmmlq" name="处理单个视频" calledElement="Process_call_activity_subprocess">
+      <bpmn:extensionElements>
+        <camunda:in sourceExpression="${videoName}" target="videoName" />
+        <camunda:out sourceExpression="${callResult}" target="callResult" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0oplsc1</bpmn:incoming>
+      <bpmn:outgoing>Flow_01plm7y</bpmn:outgoing>
+      <bpmn:multiInstanceLoopCharacteristics camunda:collection="${videoNames}" camunda:elementVariable="videoName" />
+    </bpmn:callActivity>
+    <bpmn:sequenceFlow id="Flow_01plm7y" sourceRef="Activity_1qwmmlq" targetRef="Activity_0z9wxyo" />
+    <bpmn:userTask id="Activity_0z9wxyo" name="确定上传" camunda:assignee="${starter}">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="vnums" label="视频数量" type="long" defaultValue="${vnums}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+          <camunda:formField id="callResult" label="处理结果" type="string" defaultValue="${callResult}">
+            <camunda:validation>
+              <camunda:constraint name="readonly" config="readonly" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_01plm7y</bpmn:incoming>
+      <bpmn:outgoing>Flow_0g0g50c</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_1uh4xxp">
+      <bpmn:incoming>Flow_0g0g50c</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0g0g50c" sourceRef="Activity_0z9wxyo" targetRef="Event_1uh4xxp" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_call_activity_test">
+      <bpmndi:BPMNShape id="BPMNShape_1caxh4v" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1cz92vo" bpmnElement="Activity_0i8ni3h">
+        <dc:Bounds x="243" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1nfp3w3_di" bpmnElement="Activity_1qwmmlq">
+        <dc:Bounds x="400" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1kdx2xd_di" bpmnElement="Activity_0z9wxyo">
+        <dc:Bounds x="560" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1uh4xxp_di" bpmnElement="Event_1uh4xxp">
+        <dc:Bounds x="722" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_1kd1h0r" bpmnElement="Flow_1jm7p1k">
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="243" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0oplsc1_di" bpmnElement="Flow_0oplsc1">
+        <di:waypoint x="343" y="120" />
+        <di:waypoint x="400" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_01plm7y_di" bpmnElement="Flow_01plm7y">
+        <di:waypoint x="500" y="120" />
+        <di:waypoint x="560" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0g0g50c_di" bpmnElement="Flow_0g0g50c">
+        <di:waypoint x="660" y="120" />
+        <di:waypoint x="722" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
