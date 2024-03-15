@@ -14,10 +14,12 @@ public class HandleOrderDelegate implements JavaDelegate {
         String endpoint = (String) execution.getVariable("endpoint");
         RuntimeService runtimeService = execution.getProcessEngineServices().getRuntimeService();
         if ("alipay".equals(endpoint)) {
-            runtimeService.startProcessInstanceByMessage("Message_alipay", execution.getBusinessKey(), execution.getVariables());
+//            runtimeService.startProcessInstanceByMessage("Message_alipay", execution.getBusinessKey(), execution.getVariables());
+            runtimeService.startProcessInstanceByMessage("Message_alipay_land",  execution.getBusinessKey(), execution.getVariables());
         }
         if ("wechat".equals(endpoint)) {
-            runtimeService.startProcessInstanceByMessage("Message_wechat_pay", execution.getBusinessKey(), execution.getVariables());
+//            runtimeService.startProcessInstanceByMessage("Message_wechat_pay", execution.getBusinessKey(), execution.getVariables());
+            runtimeService.startProcessInstanceByMessage("Message_wechat_pay_land",  execution.getBusinessKey(), execution.getVariables());
         }
     }
 }
