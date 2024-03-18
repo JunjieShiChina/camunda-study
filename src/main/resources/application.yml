@@ -10,6 +10,12 @@ spring:
 
 
 camunda.bpm:
+#  full 所有历史数据都会被保存，包括变量的更新（默认）
+#  audit 只有历史的流程实例，活动实例，表单数据等会被保存
+#  auto 数据之前配置的是什么级别就是用什么级别，如果没配置则是audit级别
+#  none 不存储历史数据
+  history-level: full
+  auto-deployment-enabled: false
   admin-user:
     id: demo
     password: demo
