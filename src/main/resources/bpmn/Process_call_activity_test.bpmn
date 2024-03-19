@@ -51,6 +51,7 @@
       <bpmn:incoming>Flow_0g0g50c</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_0g0g50c" sourceRef="Activity_0z9wxyo" targetRef="Event_1uh4xxp" />
+    <bpmn:serviceTask id="Activity_1itujsu" camunda:type="external" camunda:topic="uhu" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_call_activity_test">
@@ -69,6 +70,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_1uh4xxp_di" bpmnElement="Event_1uh4xxp">
         <dc:Bounds x="722" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1qp0fjy_di" bpmnElement="Activity_1itujsu">
+        <dc:Bounds x="340" y="240" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_1kd1h0r" bpmnElement="Flow_1jm7p1k">
         <di:waypoint x="188" y="120" />

@@ -1,7 +1,6 @@
 package me.shijunjiee.camundastudy;
 
 import lombok.extern.slf4j.Slf4j;
-import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -9,7 +8,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@EnableProcessApplication
 @Slf4j
 public class CamundaStudyApplication implements CommandLineRunner {
 	private static final Logger logger= LoggerFactory.getLogger(CamundaStudyApplication.class);
