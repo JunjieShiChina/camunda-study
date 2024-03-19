@@ -108,6 +108,19 @@
 			<version>${camunda.spring-boot.version}</version>
 		</dependency>
 
+<!--		camunda使用spinJson引擎端需要引入如下依赖 start-->
+		<dependency>
+			<groupId>org.camunda.bpm</groupId>
+			<artifactId>camunda-engine-plugin-spin</artifactId>
+			<version>${camunda.spring-boot.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.camunda.spin</groupId>
+			<artifactId>camunda-spin-dataformat-all</artifactId>
+			<version>1.23.0</version>
+		</dependency>
+<!--		camunda使用spinJson引擎端需要引入如下依赖 end-->
 
 
 		<dependency>
