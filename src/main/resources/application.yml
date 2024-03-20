@@ -10,7 +10,7 @@ server:
 spring:
   datasource:
     url: jdbc:mysql://10.39.202.254:3306/enn_intelligent_tool?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true    # 数据库
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     username: enn_intelligent_tool_rw
     password: Btg#no!j@cQ9
 
@@ -22,6 +22,8 @@ camunda.bpm:
 #  none 不存储历史数据
   history-level: full
   auto-deployment-enabled: false
+  authorization:
+    tenant-check-enabled: true #租户校验，默认为true
   admin-user:
     id: demo
     password: demo
