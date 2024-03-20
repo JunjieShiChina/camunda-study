@@ -1,0 +1,3 @@
+#为了自动控制新的配置，camunda采用SPI机制加载用户配置
+#SPI（Service Provider Interface）是 Java 平台提供的一种机制，用于实现组件间的松耦合。它允许开发者定义服务接口，并允许其他开发者实现这些接口并提供服务的具体实现。SPI 机制通常用于在软件框架中扩展功能，允许第三方开发者通过提供自己的实现来扩展框架的功能。
+me.shijunjiee.camundastudy.config.HttpConnectorConfigurator
