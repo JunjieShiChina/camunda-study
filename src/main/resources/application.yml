@@ -24,6 +24,7 @@ camunda.bpm:
   auto-deployment-enabled: false
   authorization:
     tenant-check-enabled: true #租户校验，默认为true
+  default-number-of-retries: 4 #任务失败后的重试次数(针对异步延续任务或job任务)
   admin-user:
     id: demo
     password: demo
