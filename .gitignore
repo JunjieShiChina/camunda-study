@@ -1,23 +1,38 @@
+.project
+.settings/
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+### Mac DS_Store files
+**/.DS_Store
+**/._.DS_Store
 
-### IntelliJ IDEA ###
+### IntelliJ IDEA
 .idea
 *.iws
 *.iml
 *.ipr
+**/target/**
+
+### Java annotation processor (APT)
+*.factorypath
+
+.vscode
+.vscode/
+
+*.prefs
+*.project
+*.classpath
+*.versionsBackup
+
+### STS ###
+.apt_generated
+.settings
+.springBeans
+.sts4-cache
 
 ### NetBeans ###
 /nbproject/private/
@@ -28,6 +43,3 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
-
-### VS Code ###
-.vscode/

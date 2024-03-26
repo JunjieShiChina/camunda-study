@@ -1,18 +1,18 @@
 server:
   port: 8888 # 端口号
 
-#spring:
-#  datasource:
-#    url: jdbc:mysql://localhost:3306/test  # 数据库
-#    driver-class-name: com.mysql.jdbc.Driver
-#    username: admin
-#    password: admin
 spring:
   datasource:
-    url: jdbc:mysql://10.39.202.254:3306/enn_intelligent_tool?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true    # 数据库
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: enn_intelligent_tool_rw
-    password: Btg#no!j@cQ9
+    url: jdbc:mysql://localhost:3306/test  # 数据库
+    driver-class-name: com.mysql.jdbc.Driver
+    username: admin
+    password: admin
+#spring:
+#  datasource:
+#    url: jdbc:mysql://10.39.202.254:3306/enn_intelligent_tool?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true    # 数据库
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: enn_intelligent_tool_rw
+#    password: Btg#no!j@cQ9
 
 
 camunda.bpm:
