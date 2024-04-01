@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0ra46vg" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="Process_1ybw702" name="testinput" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0dgoipq</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0dgoipq" sourceRef="StartEvent_1" targetRef="Activity_0yzacd7" />
+    <bpmn:sequenceFlow id="Flow_17q7za0" sourceRef="Activity_0yzacd7" targetRef="Activity_0jzat3u" />
+    <bpmn:userTask id="Activity_0yzacd7">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="testFormStr" label="表单字符" type="string">
+            <camunda:validation>
+              <camunda:constraint name="required" />
+            </camunda:validation>
+          </camunda:formField>
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0dgoipq</bpmn:incoming>
+      <bpmn:outgoing>Flow_17q7za0</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Activity_0jzat3u" name="service1" camunda:delegateExpression="${inputservice1}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="serviceStr">${testFormStr}</camunda:inputParameter>
+          <camunda:outputParameter name="serviceStrOutput">${serviceStr}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_17q7za0</bpmn:incoming>
+      <bpmn:outgoing>Flow_07gs43i</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_07gs43i" sourceRef="Activity_0jzat3u" targetRef="Activity_0i3p17b" />
+    <bpmn:serviceTask id="Activity_0i3p17b" name="service2" camunda:delegateExpression="${inputservice2}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="serviceStr2">${serviceStrOutput}</camunda:inputParameter>
+          <camunda:outputParameter name="serviceStrOutput2">${serviceStr2}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_07gs43i</bpmn:incoming>
+      <bpmn:outgoing>Flow_07eqvyv</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_07eqvyv" sourceRef="Activity_0i3p17b" targetRef="Activity_19or089" />
+    <bpmn:serviceTask id="Activity_19or089" name="service3" camunda:delegateExpression="${inputservice3}">
+      <bpmn:incoming>Flow_07eqvyv</bpmn:incoming>
+      <bpmn:outgoing>Flow_13z2u3y</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_1mqvdja">
+      <bpmn:incoming>Flow_13z2u3y</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_13z2u3y" sourceRef="Activity_19or089" targetRef="Event_1mqvdja" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1ybw702">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0recpbd_di" bpmnElement="Activity_0yzacd7">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0rv8djb_di" bpmnElement="Activity_0jzat3u">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0x6m1qw_di" bpmnElement="Activity_0i3p17b">
+        <dc:Bounds x="590" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_09xbue0_di" bpmnElement="Activity_19or089">
+        <dc:Bounds x="750" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1mqvdja_di" bpmnElement="Event_1mqvdja">
+        <dc:Bounds x="912" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0dgoipq_di" bpmnElement="Flow_0dgoipq">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17q7za0_di" bpmnElement="Flow_17q7za0">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07gs43i_di" bpmnElement="Flow_07gs43i">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="590" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_07eqvyv_di" bpmnElement="Flow_07eqvyv">
+        <di:waypoint x="690" y="117" />
+        <di:waypoint x="750" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13z2u3y_di" bpmnElement="Flow_13z2u3y">
+        <di:waypoint x="850" y="117" />
+        <di:waypoint x="912" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
