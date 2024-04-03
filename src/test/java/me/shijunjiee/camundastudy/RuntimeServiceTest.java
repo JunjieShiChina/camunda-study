@@ -63,7 +63,12 @@ public class RuntimeServiceTest {
         // deploy
         Deployment deployment = repositoryService.createDeployment().addClasspathResource("diagram_1_manyperson.bpmn").name(deployName)
                 .deploy();
+    }
 
+    @Test
+    public void testGetProcessDefinition() {
+        List<ProcessDefinition> list = repositoryService.createProcessDefinitionQuery().processDefinitionKey("Process_topic_circle").list();
+        System.out.println(list);
     }
 
 }
