@@ -11,6 +11,12 @@
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1tps78w" sourceRef="Activity_1a6o19t" targetRef="Event_12hw6sl" />
     <bpmn:sendTask id="Activity_1x541z9" name="下发任务" camunda:type="external" camunda:topic="dispatchTask">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="pro1" value="testProperty" />
+          <camunda:property name="pro2" value="testProperty2" />
+        </camunda:properties>
+      </bpmn:extensionElements>
       <bpmn:incoming>Flow_0avm0p2</bpmn:incoming>
       <bpmn:outgoing>Flow_15h9kog</bpmn:outgoing>
     </bpmn:sendTask>
@@ -40,13 +46,13 @@
         <di:waypoint x="215" y="117" />
         <di:waypoint x="270" y="117" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1tps78w_di" bpmnElement="Flow_1tps78w">
-        <di:waypoint x="530" y="117" />
-        <di:waypoint x="592" y="117" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_15h9kog_di" bpmnElement="Flow_15h9kog">
         <di:waypoint x="370" y="117" />
         <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1tps78w_di" bpmnElement="Flow_1tps78w">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="592" y="117" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
