@@ -41,8 +41,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 开启sql日志
     map-underscore-to-case: true # 开启驼峰映射(mp默认开启)
 
-logging:
-  level:
-#    root: DEBUG
-    org.camunda.bpm: DEBUG
+#logging:
+#  level:
+#    org.camunda.bpm: DEBUG
 

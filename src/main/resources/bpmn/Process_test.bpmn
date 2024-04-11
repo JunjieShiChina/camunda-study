@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1jpuc9k" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="Process_aysc_test" name="异步任务测试" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:laneSet id="LaneSet_0u8b2ut" />
+    <bpmn:sequenceFlow id="Flow_0a0k298" sourceRef="Activity_1uec5tl" targetRef="Event_1depbet" />
+    <bpmn:sequenceFlow id="Flow_11bd98p" sourceRef="Activity_13hd3ix" targetRef="Activity_1uec5tl" />
+    <bpmn:sequenceFlow id="Flow_02gxj6i" sourceRef="Activity_1nqe63e" targetRef="Activity_13hd3ix" />
+    <bpmn:sequenceFlow id="Flow_1f84lct" sourceRef="StartEvent_1" targetRef="Activity_1nqe63e" />
+    <bpmn:endEvent id="Event_1depbet">
+      <bpmn:incoming>Flow_0a0k298</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Activity_1uec5tl" name="打印系统时间和当前流程变量" camunda:delegateExpression="${printTimeDelegate}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="ab" />
+          <camunda:outputParameter name="Output_365sact" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_11bd98p</bpmn:incoming>
+      <bpmn:outgoing>Flow_0a0k298</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:callActivity id="Activity_13hd3ix" name="调用任务中心" calledElement="process_aysc">
+      <bpmn:extensionElements>
+        <camunda:in sourceExpression="${taskId}" target="taskId" />
+        <camunda:in sourceExpression="${taskExecutor}" target="taskExecutor" />
+        <camunda:out sourceExpression="${result1}" target="result1" />
+        <camunda:out sourceExpression="${result2}" target="result2" />
+        <camunda:in businessKey="#{execution.processBusinessKey}" />
+        <camunda:out sourceExpression="" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_02gxj6i</bpmn:incoming>
+      <bpmn:outgoing>Flow_11bd98p</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:serviceTask id="Activity_1nqe63e" name="打印系统时间和当前流程变量" camunda:delegateExpression="${printTimeDelegate}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="Output_1k5l05p" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1f84lct</bpmn:incoming>
+      <bpmn:outgoing>Flow_02gxj6i</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1f84lct</bpmn:outgoing>
+    </bpmn:startEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_aysc_test">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0xf785c_di" bpmnElement="Activity_1nqe63e">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1bfm93w_di" bpmnElement="Activity_13hd3ix">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1w24ybx_di" bpmnElement="Activity_1uec5tl">
+        <dc:Bounds x="590" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1depbet_di" bpmnElement="Event_1depbet">
+        <dc:Bounds x="752" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1f84lct_di" bpmnElement="Flow_1f84lct">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02gxj6i_di" bpmnElement="Flow_02gxj6i">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11bd98p_di" bpmnElement="Flow_11bd98p">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="590" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0a0k298_di" bpmnElement="Flow_0a0k298">
+        <di:waypoint x="690" y="117" />
+        <di:waypoint x="752" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

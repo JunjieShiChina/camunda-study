@@ -12,6 +12,9 @@ import java.util.Date;
 public class PrintTimeDelegate implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {
+        execution.getVariables().forEach((k, v) -> log.info("key:{}, value:{}", k, v));
+
+        execution.setVariable("aaa", "asdfadwsf");
         log.info("当前系统时间:{}", new Date());
     }
 }
