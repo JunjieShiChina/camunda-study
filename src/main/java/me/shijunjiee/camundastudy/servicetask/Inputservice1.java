@@ -11,5 +11,6 @@ public class Inputservice1 implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {
         System.out.println("Inputservice1 execute");
+        System.out.println("execution1: " + execution.getVariables());
     }
 }

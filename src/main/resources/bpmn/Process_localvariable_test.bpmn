@@ -53,13 +53,13 @@
         <di:waypoint x="215" y="117" />
         <di:waypoint x="270" y="117" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_06xs0u7_di" bpmnElement="Flow_06xs0u7">
-        <di:waypoint x="370" y="117" />
-        <di:waypoint x="430" y="117" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0myqmo2_di" bpmnElement="Flow_0myqmo2">
         <di:waypoint x="530" y="117" />
         <di:waypoint x="592" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06xs0u7_di" bpmnElement="Flow_06xs0u7">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
