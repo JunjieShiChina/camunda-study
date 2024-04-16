@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_053pkvv" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="Process_conditionalboundaryeventtest" name="条件边界事件测试" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:serviceTask id="Activity_156a4o4" name="设置变量testV" camunda:expression="${setVariableService.putVariable(execution,&#34;testV&#34;,&#34;abc&#34;)}">
+      <bpmn:incoming>Flow_0w27jii</bpmn:incoming>
+      <bpmn:outgoing>Flow_14ej4dc</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:boundaryEvent id="Event_1qmhafo" attachedToRef="Activity_156a4o4">
+      <bpmn:outgoing>Flow_1kvm475</bpmn:outgoing>
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_089k1fa" camunda:variableName="testV" camunda:variableEvents="create">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression">${testV=="abc"}</bpmn:condition>
+      </bpmn:conditionalEventDefinition>
+    </bpmn:boundaryEvent>
+    <bpmn:startEvent id="Event_1gv9lcj">
+      <bpmn:outgoing>Flow_0w27jii</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0w27jii" sourceRef="Event_1gv9lcj" targetRef="Activity_156a4o4" />
+    <bpmn:endEvent id="Event_1t8b190">
+      <bpmn:incoming>Flow_14ej4dc</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_14ej4dc" sourceRef="Activity_156a4o4" targetRef="Event_1t8b190" />
+    <bpmn:sequenceFlow id="Flow_1kvm475" name="生成新的变量" sourceRef="Event_1qmhafo" targetRef="Activity_0wegvvy" />
+    <bpmn:serviceTask id="Activity_0wegvvy" name="打印变量" camunda:delegateExpression="${printVariableDelegate}">
+      <bpmn:incoming>Flow_1kvm475</bpmn:incoming>
+      <bpmn:outgoing>Flow_0za4n6k</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_0vykvco">
+      <bpmn:incoming>Flow_0za4n6k</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0za4n6k" sourceRef="Activity_0wegvvy" targetRef="Event_0vykvco" />
+  </bpmn:process>
+  <bpmn:escalation id="Escalation_1fau9b5" name="Escalation_1fau9b5" escalationCode="9001" />
+  <bpmn:escalation id="Escalation_0t563u4" name="Escalation_1fau9b5" escalationCode="9001" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_conditionalboundaryeventtest">
+      <bpmndi:BPMNShape id="Activity_03gi6qp_di" bpmnElement="Activity_156a4o4">
+        <dc:Bounds x="310" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1gv9lcj_di" bpmnElement="Event_1gv9lcj">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1t8b190_di" bpmnElement="Event_1t8b190">
+        <dc:Bounds x="532" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1ag40o1_di" bpmnElement="Activity_0wegvvy">
+        <dc:Bounds x="440" y="200" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0vykvco_di" bpmnElement="Event_0vykvco">
+        <dc:Bounds x="592" y="222" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1750fg2_di" bpmnElement="Event_1qmhafo">
+        <dc:Bounds x="352" y="142" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0w27jii_di" bpmnElement="Flow_0w27jii">
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="310" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_14ej4dc_di" bpmnElement="Flow_14ej4dc">
+        <di:waypoint x="410" y="120" />
+        <di:waypoint x="532" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1kvm475_di" bpmnElement="Flow_1kvm475">
+        <di:waypoint x="370" y="178" />
+        <di:waypoint x="370" y="240" />
+        <di:waypoint x="440" y="240" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="352" y="206" width="66" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0za4n6k_di" bpmnElement="Flow_0za4n6k">
+        <di:waypoint x="540" y="240" />
+        <di:waypoint x="592" y="240" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
