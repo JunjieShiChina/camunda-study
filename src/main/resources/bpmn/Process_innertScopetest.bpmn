@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_10xsc3e" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="Process_innertScopetest" name="变量子流程作用域测试" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0q4ka01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0q4ka01" sourceRef="StartEvent_1" targetRef="Activity_1khp4nj" />
+    <bpmn:sequenceFlow id="Flow_1b5rgra" sourceRef="Activity_1khp4nj" targetRef="Activity_12zsiw3" />
+    <bpmn:sequenceFlow id="Flow_18bmx9y" sourceRef="Activity_12zsiw3" targetRef="Activity_19ij1o3" />
+    <bpmn:endEvent id="Event_01a5rdx">
+      <bpmn:incoming>Flow_025usjo</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_025usjo" sourceRef="Activity_19ij1o3" targetRef="Event_01a5rdx" />
+    <bpmn:serviceTask id="Activity_1khp4nj" name="设置并打印上下文" camunda:expression="${setVariableAndPrintService.putVariable(execution,&#34;varOuter&#34;,&#34;varOuterV&#34;)}">
+      <bpmn:incoming>Flow_0q4ka01</bpmn:incoming>
+      <bpmn:outgoing>Flow_1b5rgra</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:callActivity id="Activity_12zsiw3" name="调用子流程" calledElement="Process_innertScopetest2">
+      <bpmn:extensionElements>
+        <camunda:in businessKey="#{execution.processBusinessKey}" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1b5rgra</bpmn:incoming>
+      <bpmn:outgoing>Flow_18bmx9y</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:serviceTask id="Activity_19ij1o3" name="设置并打印上下文" camunda:expression="${setVariableAndPrintService.putVariable(execution,&#34;varOuter2&#34;,&#34;varOuterV2&#34;)}">
+      <bpmn:incoming>Flow_18bmx9y</bpmn:incoming>
+      <bpmn:outgoing>Flow_025usjo</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_innertScopetest">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_01a5rdx_di" bpmnElement="Event_01a5rdx">
+        <dc:Bounds x="792" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0s7foez_di" bpmnElement="Activity_1khp4nj">
+        <dc:Bounds x="280" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0e695dd_di" bpmnElement="Activity_12zsiw3">
+        <dc:Bounds x="450" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0v425nj_di" bpmnElement="Activity_19ij1o3">
+        <dc:Bounds x="620" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0q4ka01_di" bpmnElement="Flow_0q4ka01">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="280" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_025usjo_di" bpmnElement="Flow_025usjo">
+        <di:waypoint x="720" y="117" />
+        <di:waypoint x="792" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1b5rgra_di" bpmnElement="Flow_1b5rgra">
+        <di:waypoint x="380" y="117" />
+        <di:waypoint x="450" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18bmx9y_di" bpmnElement="Flow_18bmx9y">
+        <di:waypoint x="550" y="117" />
+        <di:waypoint x="620" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
