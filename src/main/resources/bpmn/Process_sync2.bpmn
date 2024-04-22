@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1vkwt4j" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="Process_sync2" name="异步任务下发2" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="Event_0qxvn4v">
+      <bpmn:outgoing>Flow_0avm0p2</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_12hw6sl">
+      <bpmn:incoming>Flow_1tps78w</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sendTask id="Activity_1x541z9" name="下发任务" camunda:type="external" camunda:topic="dispatchTask2">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="pro1" value="testProperty" />
+          <camunda:property name="pro2" value="testProperty2" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0avm0p2</bpmn:incoming>
+      <bpmn:outgoing>Flow_15h9kog</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:receiveTask id="Activity_1a6o19t" name="返回结果" messageRef="Message_227tau4">
+      <bpmn:extensionElements>
+        <camunda:executionListener delegateExpression="${printVariableListener}" event="end" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_15h9kog</bpmn:incoming>
+      <bpmn:outgoing>Flow_1tps78w</bpmn:outgoing>
+    </bpmn:receiveTask>
+    <bpmn:sequenceFlow id="Flow_0avm0p2" sourceRef="Event_0qxvn4v" targetRef="Activity_1x541z9" />
+    <bpmn:sequenceFlow id="Flow_1tps78w" sourceRef="Activity_1a6o19t" targetRef="Event_12hw6sl" />
+    <bpmn:sequenceFlow id="Flow_15h9kog" sourceRef="Activity_1x541z9" targetRef="Activity_1a6o19t" />
+  </bpmn:process>
+  <bpmn:message id="Message_227tau4" name="Message_aysc_finish" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_sync2">
+      <bpmndi:BPMNShape id="BPMNShape_133ro41" bpmnElement="Event_0qxvn4v">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_12hw6sl_di" bpmnElement="Event_12hw6sl">
+        <dc:Bounds x="565" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_006pr5t_di" bpmnElement="Activity_1x541z9">
+        <dc:Bounds x="243" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0fonvil_di" bpmnElement="Activity_1a6o19t">
+        <dc:Bounds x="403" y="80" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0avm0p2_di" bpmnElement="Flow_0avm0p2">
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="243" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1tps78w_di" bpmnElement="Flow_1tps78w">
+        <di:waypoint x="503" y="120" />
+        <di:waypoint x="565" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15h9kog_di" bpmnElement="Flow_15h9kog">
+        <di:waypoint x="343" y="120" />
+        <di:waypoint x="403" y="120" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0bq09v5" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="Process_asyc_test" name="异步连续测试" isExecutable="true" camunda:historyTimeToLive="180">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1dsrcbj</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1dsrcbj" sourceRef="StartEvent_1" targetRef="Activity_1f1mmfp" />
+    <bpmn:sequenceFlow id="Flow_1jsohtu" sourceRef="Activity_1f1mmfp" targetRef="Activity_1tj52vo" />
+    <bpmn:sequenceFlow id="Flow_0a8f2tk" sourceRef="Activity_1tj52vo" targetRef="Activity_182ntj0" />
+    <bpmn:endEvent id="Event_1fv3zio">
+      <bpmn:incoming>Flow_0zt64ha</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0zt64ha" sourceRef="Activity_182ntj0" targetRef="Event_1fv3zio" />
+    <bpmn:serviceTask id="Activity_1f1mmfp" name="print1" camunda:asyncBefore="true" camunda:expression="${printService.doPrint(&#34;1&#34;)}">
+      <bpmn:incoming>Flow_1dsrcbj</bpmn:incoming>
+      <bpmn:outgoing>Flow_1jsohtu</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_1tj52vo" name="error" camunda:asyncBefore="true" camunda:delegateExpression="${throwErrorService}">
+      <bpmn:incoming>Flow_1jsohtu</bpmn:incoming>
+      <bpmn:outgoing>Flow_0a8f2tk</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_182ntj0" name="print3" camunda:asyncBefore="true" camunda:expression="${printService.doPrint(&#34;3&#34;)}">
+      <bpmn:incoming>Flow_0a8f2tk</bpmn:incoming>
+      <bpmn:outgoing>Flow_0zt64ha</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_asyc_test">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1fv3zio_di" bpmnElement="Event_1fv3zio">
+        <dc:Bounds x="752" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_02fq7y5_di" bpmnElement="Activity_1f1mmfp">
+        <dc:Bounds x="270" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_08ooapo_di" bpmnElement="Activity_1tj52vo">
+        <dc:Bounds x="430" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_04iqeq5_di" bpmnElement="Activity_182ntj0">
+        <dc:Bounds x="590" y="77" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1dsrcbj_di" bpmnElement="Flow_1dsrcbj">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="270" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0zt64ha_di" bpmnElement="Flow_0zt64ha">
+        <di:waypoint x="690" y="117" />
+        <di:waypoint x="752" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jsohtu_di" bpmnElement="Flow_1jsohtu">
+        <di:waypoint x="370" y="117" />
+        <di:waypoint x="430" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0a8f2tk_di" bpmnElement="Flow_0a8f2tk">
+        <di:waypoint x="530" y="117" />
+        <di:waypoint x="590" y="117" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
