@@ -2,10 +2,13 @@ package me.shijunjiee.camundastudy;
 
 import org.camunda.bpm.engine.*;
 import org.camunda.bpm.engine.history.HistoricProcessInstanceQuery;
+import org.camunda.bpm.engine.variable.Variables;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.HashMap;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = CamundaStudyApplication.class)
@@ -16,15 +19,19 @@ public class CamundaApiTest {
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
         // 负责流程定义与部署
         RepositoryService repositoryService = processEngine.getRepositoryService();
+        repositoryService.createProcessDefinitionQuery().processDefinitionKey("").processDefinitionVersion(1).list();
         // 部署
-        repositoryService.createDeployment().addClasspathResource("").deploy();
+        repositoryService.createDeployment().addClasspathResource("").addClasspathResource("").deploy();
         // 删除...
         repositoryService.deleteDeployment("");
 
         // 负责流程实例的相关操作，包含流程变量等
         RuntimeService runtimeService = processEngine.getRuntimeService();
         runtimeService.startProcessInstanceByMessage("");
+        runtimeService.startProcessInstanceById("", "", new HashMap<>());
+
         runtimeService.deleteProcessInstance("", "");
+
 
         // 负责具体业务的内部操作，也可以操作变量
         TaskService taskService = processEngine.getTaskService();

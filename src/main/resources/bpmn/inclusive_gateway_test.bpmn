@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0lhdnt6" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
-  <bpmn:process id="Process_inclusive_test" name="包含网关测试" isExecutable="true" camunda:historyTimeToLive="180">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0ldsfa1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:process id="Process_inclusive_test" name="defidtest" isExecutable="true" camunda:historyTimeToLive="180">
     <bpmn:startEvent id="StartEvent_1" camunda:initiator="starter">
       <bpmn:outgoing>Flow_0xnrho0</bpmn:outgoing>
     </bpmn:startEvent>
@@ -132,14 +132,14 @@
           <dc:Bounds x="447" y="293" width="40" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0rs8ppc_di" bpmnElement="Flow_0rs8ppc">
+        <di:waypoint x="630" y="227" />
+        <di:waypoint x="685" y="227" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_0tkp1jn_di" bpmnElement="Flow_0tkp1jn">
         <di:waypoint x="630" y="120" />
         <di:waypoint x="710" y="120" />
         <di:waypoint x="710" y="202" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0rs8ppc_di" bpmnElement="Flow_0rs8ppc">
-        <di:waypoint x="630" y="227" />
-        <di:waypoint x="685" y="227" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1kezg8n_di" bpmnElement="Flow_1kezg8n">
         <di:waypoint x="630" y="340" />
